@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import pyodbc
@@ -10,6 +9,30 @@ st.set_page_config(
 )
 
 st.title('Customer churn data')
+
+# Dictionary to store column descriptions
+column_descriptions = {
+    'gender': 'Gender of the customer',
+    'SeniorCitizen': 'Whether the customer is a senior citizen (1) or not (0)',
+    'Partner': 'Whether the customer has a partner (Yes) or not (No)',
+    'Dependents': 'Whether the customer has dependents (Yes) or not (No)',
+    'tenure': 'Number of months the customer has stayed with the company',
+    'PhoneService': 'Whether the customer has phone service (Yes) or not (No)',
+    'MultipleLines': 'Whether the customer has multiple lines (Yes, No, or No phone service)',
+    'InternetService': 'Type of internet service the customer has (DSL, Fiber optic, or No)',
+    'OnlineSecurity': 'Whether the customer has online security (Yes, No, or No internet service)',
+    'OnlineBackup': 'Whether the customer has online backup (Yes, No, or No internet service)',
+    'DeviceProtection': 'Whether the customer has device protection (Yes, No, or No internet service)',
+    'TechSupport': 'Whether the customer has tech support (Yes, No, or No internet service)',
+    'StreamingTV': 'Whether the customer has streaming TV (Yes, No, or No internet service)',
+    'StreamingMovies': 'Whether the customer has streaming movies (Yes, No, or No internet service)',
+    'Contract': 'Type of contract the customer has (Month-to-month, One year, Two year)',
+    'PaperlessBilling': 'Whether the customer has paperless billing (Yes) or not (No)',
+    'PaymentMethod': 'Payment method used by the customer (Electronic check, Mailed check, Bank transfer, Credit card)',
+    'MonthlyCharges': 'Monthly charges of the customer',
+    'TotalCharges': 'Total charges paid by the customer',
+    'Churn': 'Whether the customer churned (Yes) or not (No)'
+}
 
 st.cache(allow_output_mutation=True, show_spinner=False)
 def sourcing_data():
@@ -64,6 +87,12 @@ if __name__ == "__main__":
         selected_data = df
 
     st.write(selected_data)
+
+    # Display column descriptions
+    st.subheader("Column Descriptions")
+    for col in selected_data.columns:
+        if col in column_descriptions:
+            st.write(f"**{col}:** {column_descriptions[col]}")
 
 
 
